@@ -5,12 +5,14 @@ config-version: 2
 
 require-dbt-version: ">=0.20.0"
 
-models: 
+models:
   shopify_source:
     +schema: stg_shopify
     +materialized: table
     tmp:
       +materialized: view
+
+profile: 'shopify_source'
 
 vars:
   shopify_source:
@@ -23,7 +25,7 @@ vars:
     transaction_source:                     "{{ source('shopify','transaction') }}"
     refund_source:                          "{{ source('shopify','refund') }}"
     order_adjustment_source:                "{{ source('shopify','order_adjustment') }}"
-    
+
     customer_pass_through_columns:          []
     order_line_refund_pass_through_columns: []
     order_line_pass_through_columns:        []
